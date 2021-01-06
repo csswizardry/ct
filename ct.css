@@ -1,0 +1,158 @@
+html {
+  --blocking: solid;
+  --blocked: dashed;
+  --notify: green;
+  --warn: orange;
+  --error: red;
+}
+
+/**
+ * Show the HEAD and set up the items we might be interested in.
+ */
+head {
+  display: block;
+}
+
+head script,
+head style, head [rel="stylesheet"] {
+  display: block;
+}
+
+head script,
+head style, head [rel="stylesheet"],
+head title {
+  margin: 5px;
+  border-width: 5px;
+  background-color: white;
+  color: black;
+}
+
+head ::before,
+head script, head style {
+  font: 1em/1.5 monospace, monospace;
+}
+
+head ::before {
+  font-weight: bold;
+}
+
+
+
+
+
+/**
+ * External Script and Style
+ */
+
+head script[src] {
+  border-style: var(--blocking);
+  border-color: var(--warn);
+}
+
+  head script[src]::before {
+    content: "[Blocking Script – " attr(src) "]"
+  }
+
+head link[rel="stylesheet"] {
+  border-style: var(--blocking);
+  border-color: var(--warn);
+}
+
+  head link[rel="stylesheet"]::before {
+    content: "[Blocking Stylesheet – " attr(href) "]"
+  }
+
+
+
+
+
+/**
+ * Inline Script and Style.
+ */
+
+head style:not(:empty),
+head script:not(:empty) {
+  max-height: 5em;
+  overflow: auto;
+  border-color: var(--notify);
+  border-style: var(--blocking);
+}
+
+  head script:not(:empty)::before {
+    content: "[Inline Script] ";
+  }
+
+  head style:not(:empty)::before {
+    content: "[Inline <style>] ";
+  }
+
+
+
+
+
+/**
+ * Blocked Title.
+ */
+head script[src]:not([async]):not([defer]):not([type=module]) ~ title,
+head script:not(:empty) ~ title {
+  display: block;
+  border-style: var(--blocked);
+  border-color: var(--error);
+}
+
+  head script[src]:not([async]):not([defer]):not([type=module]) ~ title::before,
+  head script:not(:empty) ~ title::before {
+    content: "[<title> blocked by JS] ";
+  }
+
+
+
+
+
+/**
+ * Blocked Scripts.
+ */
+
+head [rel="stylesheet"] ~ script,
+head style:not(:empty) ~ script {
+  border-style: var(--blocked);
+  border-color: var(--warn);
+}
+
+  head [rel="stylesheet"] ~ script::before,
+  head style:not(:empty) ~ script::before {
+    content: "[JS blocked by CSS – " attr(src) "]";
+  }
+
+
+
+
+
+/**
+ * Third Party blocking resources.
+ */
+head script[src^="//"],
+head script[src^="http"],
+head [rel="stylesheet"][href^="//"],
+head [rel="stylesheet"][href^="http"] {
+  border-style: var(--blocking);
+  border-color: var(--error);
+}
+
+  head script[src^="//"]::before,
+  head script[src^="http"]::before {
+    content: "[Third Party Blocking Script – " attr(src) "]";
+  }
+
+  head [rel="stylesheet"][href^="//"]::before,
+  head [rel="stylesheet"][href^="http"]::before {
+    content: "[Third Party Blocking Stylesheet – " attr(href) "]";
+  }
+
+/**
+ * Hide all irrelevant scripts and styles (and this block). We’re done!
+ */
+link[rel="stylesheet"].ct, style.ct,
+script[async], script[defer], script[type=module] {
+  display: none !important
+}
