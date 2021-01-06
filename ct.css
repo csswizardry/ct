@@ -18,8 +18,8 @@
  */
 
 html {
-  --ct-blocking: solid;
-  --ct-blocked: dashed;
+  --ct-is-problematic: solid;
+  --ct-is-affected: dashed;
   --ct-notify: green;
   --ct-warn: orange;
   --ct-error: red;
@@ -70,7 +70,7 @@ head ::before {
 
 head script[src],
 head link[rel="stylesheet"] {
-  border-style: var(--ct-blocking);
+  border-style: var(--ct-is-problematic);
   border-color: var(--ct-warn);
 }
 
@@ -96,7 +96,7 @@ head script:not(:empty) {
   overflow: auto;
   white-space: pre;
   border-color: var(--ct-notify);
-  border-style: var(--ct-blocking);
+  border-style: var(--ct-is-problematic);
 }
 
   head script:not(:empty)::before {
@@ -122,7 +122,7 @@ head script:not(:empty) {
 head script[src]:not([async]):not([defer]):not([type=module]) ~ title,
 head script:not(:empty) ~ title {
   display: block;
-  border-style: var(--ct-blocked);
+  border-style: var(--ct-is-affected);
   border-color: var(--ct-error);
 }
 
@@ -141,7 +141,7 @@ head script:not(:empty) ~ title {
 
 head [rel="stylesheet"] ~ script,
 head style:not(:empty) ~ script {
-  border-style: var(--ct-blocked);
+  border-style: var(--ct-is-affected);
   border-color: var(--ct-warn);
 }
 
@@ -164,7 +164,7 @@ head script[src][src^="//"],
 head script[src][src^="http"],
 head [rel="stylesheet"][href^="//"],
 head [rel="stylesheet"][href^="http"] {
-  border-style: var(--ct-blocking);
+  border-style: var(--ct-is-problematic);
   border-color: var(--ct-error);
 }
 
@@ -187,7 +187,7 @@ head [rel="stylesheet"][href^="http"] {
  */
 
 head [rel="dns-prefetch"] {
-  border-style: var(--ct-blocking);
+  border-style: var(--ct-is-problematic);
   border-color: var(--ct-warn);
 }
 
