@@ -13,21 +13,28 @@
 
 
 
+/**
+ * It’s slightly easier to remember topics than it is colours. Set up some
+ * custom properties for use later on.
+ */
+
 html {
-  --blocking: solid;
-  --blocked: dashed;
-  --notify: green;
-  --warn: orange;
-  --error: red;
+  --ct-blocking: solid;
+  --ct-blocked: dashed;
+  --ct-notify: green;
+  --ct-warn: orange;
+  --ct-error: red;
 }
+
+
+
+
 
 /**
  * Show the HEAD and set up the items we might be interested in.
  */
-head {
-  display: block;
-}
 
+head,
 head script,
 head style, head [rel="stylesheet"] {
   display: block;
@@ -60,8 +67,8 @@ head ::before {
  */
 
 head script[src] {
-  border-style: var(--blocking);
-  border-color: var(--warn);
+  border-style: var(--ct-blocking);
+  border-color: var(--ct-warn);
 }
 
   head script[src]::before {
@@ -69,8 +76,8 @@ head script[src] {
   }
 
 head link[rel="stylesheet"] {
-  border-style: var(--blocking);
-  border-color: var(--warn);
+  border-style: var(--ct-blocking);
+  border-color: var(--ct-warn);
 }
 
   head link[rel="stylesheet"]::before {
@@ -89,8 +96,8 @@ head style:not(:empty),
 head script:not(:empty) {
   max-height: 5em;
   overflow: auto;
-  border-color: var(--notify);
-  border-style: var(--blocking);
+  border-color: var(--ct-notify);
+  border-style: var(--ct-blocking);
 }
 
   head script:not(:empty)::before {
@@ -98,7 +105,7 @@ head script:not(:empty) {
   }
 
   head style:not(:empty)::before {
-    content: "[Inline <style>] ";
+    content: "[Inline Style] ";
   }
 
 
@@ -108,11 +115,12 @@ head script:not(:empty) {
 /**
  * Blocked Title.
  */
+
 head script[src]:not([async]):not([defer]):not([type=module]) ~ title,
 head script:not(:empty) ~ title {
   display: block;
-  border-style: var(--blocked);
-  border-color: var(--error);
+  border-style: var(--ct-blocked);
+  border-color: var(--ct-error);
 }
 
   head script[src]:not([async]):not([defer]):not([type=module]) ~ title::before,
@@ -130,8 +138,8 @@ head script:not(:empty) ~ title {
 
 head [rel="stylesheet"] ~ script,
 head style:not(:empty) ~ script {
-  border-style: var(--blocked);
-  border-color: var(--warn);
+  border-style: var(--ct-blocked);
+  border-color: var(--ct-warn);
 }
 
   head [rel="stylesheet"] ~ script::before,
@@ -146,12 +154,13 @@ head style:not(:empty) ~ script {
 /**
  * Third Party blocking resources.
  */
+
 head script[src^="//"],
 head script[src^="http"],
 head [rel="stylesheet"][href^="//"],
 head [rel="stylesheet"][href^="http"] {
-  border-style: var(--blocking);
-  border-color: var(--error);
+  border-style: var(--ct-blocking);
+  border-color: var(--ct-error);
 }
 
   head script[src^="//"]::before,
@@ -164,9 +173,14 @@ head [rel="stylesheet"][href^="http"] {
     content: "[Third Party Blocking Stylesheet – " attr(href) "]";
   }
 
+
+
+
+
 /**
  * Hide all irrelevant scripts and styles (and this block). We’re done!
  */
+
 link[rel="stylesheet"].ct, style.ct,
 script[async], script[defer], script[type=module] {
   display: none !important
