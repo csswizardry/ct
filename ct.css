@@ -50,7 +50,7 @@ head title {
 
 head ::before,
 head script, head style {
-  font: 1em/1.5 monospace, monospace;
+  font: 16px/1.5 monospace, monospace;
 }
 
 head ::before {
