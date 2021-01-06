@@ -35,12 +35,14 @@ html {
 
 head,
 head script,
-head style, head [rel="stylesheet"] {
+head style, head [rel="stylesheet"],
+head [rel="dns-prefetch"] {
   display: block;
 }
 
 head script,
 head style, head [rel="stylesheet"],
+head [rel="dns-prefetch"],
 head title {
   margin: 5px;
   border-width: 5px;
@@ -173,6 +175,23 @@ head [rel="stylesheet"][href^="http"] {
   head [rel="stylesheet"][href^="http"]::before {
     content: "[Third Party Blocking Stylesheet – " attr(href) "]";
   }
+
+
+
+
+
+/**
+ * DNS-Prefetching is old school.
+ */
+
+head [rel="dns-prefetch"] {
+  border-style: var(--ct-blocking);
+  border-color: var(--ct-warn);
+}
+
+head [rel="dns-prefetch"]::before {
+  content: "[Legacy dns-prefetch – " attr(href) "]";
+}
 
 
 
