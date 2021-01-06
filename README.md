@@ -10,3 +10,7 @@ in your page’s `<head>` tags.
 ## Simple Usage
 
 Paste this anywhere in your HTML:
+
+```html
+<link rel="stylesheet" href="https://csswizardry.com/ct/ct.css" class="ct" />
+```
