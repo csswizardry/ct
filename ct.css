@@ -6,7 +6,6 @@
  * ct.css – Let’s take a look inside your <head>…
  *
  * © Harry Roberts 2021 – twitter.com/csswizardry
- *
  */
 
 
@@ -31,7 +30,7 @@ html {
 
 
 /**
- * Show the HEAD and set up the items we might be interested in.
+ * Show the <head> and set up the items we might be interested in.
  */
 
 head,
@@ -66,7 +65,8 @@ head ::before {
  * External Script and Style
  */
 
-head script[src] {
+head script[src],
+head link[rel="stylesheet"] {
   border-style: var(--ct-blocking);
   border-color: var(--ct-warn);
 }
@@ -74,11 +74,6 @@ head script[src] {
   head script[src]::before {
     content: "[Blocking Script – " attr(src) "]"
   }
-
-head link[rel="stylesheet"] {
-  border-style: var(--ct-blocking);
-  border-color: var(--ct-warn);
-}
 
   head link[rel="stylesheet"]::before {
     content: "[Blocking Stylesheet – " attr(href) "]"
@@ -114,6 +109,10 @@ head script:not(:empty) {
 
 /**
  * Blocked Title.
+ *
+ * These selectors are generally more complex because the Key Selector (`title`)
+ * depends on the specific conditions of preceding JS--we can’t cast a wide net
+ * and narrow it down later as we can when targeting script and style elements.
  */
 
 head script[src]:not([async]):not([defer]):not([type=module]) ~ title,
@@ -153,6 +152,8 @@ head style:not(:empty) ~ script {
 
 /**
  * Third Party blocking resources.
+ *
+ * Expect false-positives here… it’s a crude proxy at best.
  */
 
 head script[src^="//"],
@@ -178,7 +179,9 @@ head [rel="stylesheet"][href^="http"] {
 
 
 /**
- * Hide all irrelevant scripts and styles (and this block). We’re done!
+ * Hide all irrelevant or non-matching scripts and styles (including ct.css).
+ *
+ * We’re done!
  */
 
 link[rel="stylesheet"].ct, style.ct,
