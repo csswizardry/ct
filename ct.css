@@ -53,6 +53,7 @@ head title {
 head ::before,
 head script, head style {
   font: 16px/1.5 monospace, monospace;
+  display: block;
 }
 
 head ::before {
@@ -93,6 +94,7 @@ head style:not(:empty),
 head script:not(:empty) {
   max-height: 5em;
   overflow: auto;
+  white-space: pre;
   border-color: var(--ct-notify);
   border-style: var(--ct-blocking);
 }
