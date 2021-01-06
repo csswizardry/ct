@@ -156,16 +156,16 @@ head style:not(:empty) ~ script {
  * Expect false-positives here… it’s a crude proxy at best.
  */
 
-head script[src^="//"],
-head script[src^="http"],
+head script[src][src^="//"],
+head script[src][src^="http"],
 head [rel="stylesheet"][href^="//"],
 head [rel="stylesheet"][href^="http"] {
   border-style: var(--ct-blocking);
   border-color: var(--ct-error);
 }
 
-  head script[src^="//"]::before,
-  head script[src^="http"]::before {
+  head script[src][src^="//"]::before,
+  head script[src][src^="http"]::before {
     content: "[Third Party Blocking Script – " attr(src) "]";
   }
 
