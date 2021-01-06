@@ -35,14 +35,12 @@ html {
 
 head,
 head script,
-head style, head [rel="stylesheet"],
-head [rel="dns-prefetch"] {
+head style, head [rel="stylesheet"] {
   display: block;
 }
 
 head script,
 head style, head [rel="stylesheet"],
-head [rel="dns-prefetch"],
 head title {
   margin: 5px;
   border-width: 5px;
@@ -191,23 +189,6 @@ head script[async][defer] {
   head script[async][defer]::before {
     content: "[async and defer is redundant: prefer defer – " attr(src) "]";
   }
-
-
-
-
-
-/**
- * DNS-Prefetching is old school.
- */
-
-head [rel="dns-prefetch"] {
-  border-style: var(--ct-is-problematic);
-  border-color: var(--ct-warn);
-}
-
-head [rel="dns-prefetch"]::before {
-  content: "[Legacy dns-prefetch – " attr(href) "]";
-}
 
 
 
