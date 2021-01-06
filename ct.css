@@ -182,6 +182,20 @@ head [rel="stylesheet"][href^="http"] {
 
 
 
+head script[async][defer] {
+  display: block;
+  border-style: var(--ct-is-problematic);
+  border-color: var(--ct-warn);
+}
+
+  head script[async][defer]::before {
+    content: "[async and defer is redundant: prefer defer – " attr(src) "]";
+  }
+
+
+
+
+
 /**
  * DNS-Prefetching is old school.
  */
@@ -207,5 +221,5 @@ head [rel="dns-prefetch"]::before {
 
 link[rel="stylesheet"].ct, style.ct,
 script[async], script[defer], script[type=module] {
-  display: none !important
+  display: none;
 }
