@@ -137,13 +137,13 @@ head script:not(:empty) ~ title {
  * Blocked Scripts.
  */
 
-head [rel="stylesheet"]:not([media="print"]) ~ script,
+head [rel="stylesheet"]:not([media="print"]):not(.ct) ~ script,
 head style:not(:empty) ~ script {
   border-style: var(--ct-is-affected);
   border-color: var(--ct-warn);
 }
 
-  head [rel="stylesheet"]:not([media="print"]) ~ script::before,
+  head [rel="stylesheet"]:not([media="print"]):not(.ct) ~ script::before,
   head style:not(:empty) ~ script::before {
     content: "[JS blocked by CSS – " attr(src) "]";
   }
@@ -158,16 +158,16 @@ head style:not(:empty) ~ script {
  * Expect false-positives here… it’s a crude proxy at best.
  */
 
-head script[src][src^="//"],
-head script[src][src^="http"],
+head script[src][src][src^="//"],
+head script[src][src][src^="http"],
 head [rel="stylesheet"][href^="//"],
 head [rel="stylesheet"][href^="http"] {
   border-style: var(--ct-is-problematic);
   border-color: var(--ct-error);
 }
 
-  head script[src][src^="//"]::before,
-  head script[src][src^="http"]::before {
+  head script[src][src][src^="//"]::before,
+  head script[src][src][src^="http"]::before {
     content: "[Third Party Blocking Script – " attr(src) "]";
   }
 
@@ -180,13 +180,13 @@ head [rel="stylesheet"][href^="http"] {
 
 
 
-head script[async][defer] {
+head script[src][async][defer] {
   display: block;
   border-style: var(--ct-is-problematic);
   border-color: var(--ct-warn);
 }
 
-  head script[async][defer]::before {
+  head script[src][async][defer]::before {
     content: "[async and defer is redundant: prefer defer – " attr(src) "]";
   }
 
