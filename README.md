@@ -38,6 +38,8 @@ document.head.appendChild(ct);
 * **Injected `script` elements:** `ct.css`, as with all CSS, acts against the
   DOM and not the HTML. As such, injected `script` elements will be falsely
   flagged as blocking.
+  * Similarly, any `script` elements that are removed from the DOM will not be
+    flagged.
 * **Third-party blocking resources:** The check for whether or not something is
   a third party is naive at best.
 * **CSP Issues:** If your app is blocking CSS from the `csswizardry.com` origin,
