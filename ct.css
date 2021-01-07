@@ -92,6 +92,7 @@ head style:not(:empty),
 head script:not(:empty) {
   max-height: 5em;
   overflow: auto;
+  background-color: #ffd;
   white-space: pre;
   border-color: var(--ct-notify);
   border-style: var(--ct-is-problematic);
