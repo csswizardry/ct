@@ -20,9 +20,9 @@
 html {
   --ct-is-problematic: solid;
   --ct-is-affected: dashed;
-  --ct-notify: green;
-  --ct-warn: orange;
-  --ct-error: red;
+  --ct-notify: #0bce6b;
+  --ct-warn: #ffa400;
+  --ct-error: #ff4e42;
 }
 
 
@@ -43,9 +43,10 @@ head script,
 head style, head [rel="stylesheet"],
 head title {
   margin: 5px;
+  padding: 5px;
   border-width: 5px;
   background-color: white;
-  color: black;
+  color: #333;
 }
 
 head ::before,
