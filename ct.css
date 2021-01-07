@@ -35,16 +35,12 @@ html {
 
 head,
 head script,
-head style, head [rel="stylesheet"],
-head [rel="dns-prefetch"],
-head [rel="preconnect"]:nth-of-type(n+4) {
+head style, head [rel="stylesheet"] {
   display: block;
 }
 
 head script,
 head style, head [rel="stylesheet"],
-head [rel="dns-prefetch"],
-head [rel="preconnect"]:nth-of-type(n+4),
 head title {
   margin: 5px;
   padding: 5px;
@@ -62,28 +58,6 @@ head script, head style {
 head ::before {
   font-weight: bold;
 }
-
-
-
-
-
-/**
- * Check for potentially troublesome resource hints.
- */
-
-head [rel="dns-prefetch"],
-head [rel="preconnect"]:nth-of-type(n+4) {
-  border-style: var(--ct-is-problematic);
-  border-color: var(--ct-warn)
-}
-
-  head [rel="dns-prefetch"]::before {
-    content: "[dns-prefetch is legacy: prefer preconnect – " attr(href) "]"
-  }
-
-  head [rel="preconnect"]:nth-of-type(n+4)::before {
-    content: "[More than 2 preconnects – " attr(href) "]"
-  }
 
 
 
