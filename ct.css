@@ -159,6 +159,25 @@ head style:not(:empty) ~ script {
 
 
 /**
+ * Using both `async` and `defer` is redundant (an anti-pattern, even). Let’s
+ * flag that.
+ */
+
+head script[src][async][defer] {
+  display: block;
+  border-style: var(--ct-is-problematic);
+  border-color: var(--ct-warn);
+}
+
+  head script[src][async][defer]::before {
+    content: "[async and defer is redundant: prefer defer – " attr(src) "]";
+  }
+
+
+
+
+
+/**
  * Third Party blocking resources.
  *
  * Expect false-positives here… it’s a crude proxy at best.
@@ -182,25 +201,6 @@ head [rel="stylesheet"][href^="http"] {
   head [rel="stylesheet"][href^="//"]::before,
   head [rel="stylesheet"][href^="http"]::before {
     content: "[Third Party Blocking Stylesheet – " attr(href) "]";
-  }
-
-
-
-
-
-/**
- * Using both `async` and `defer` is redundant (an anti-pattern, even). Let’s
- * flag that.
- */
-
-head script[src][async][defer] {
-  display: block;
-  border-style: var(--ct-is-problematic);
-  border-color: var(--ct-warn);
-}
-
-  head script[src][async][defer]::before {
-    content: "[async and defer is redundant: prefer defer – " attr(src) "]";
   }
 
 
