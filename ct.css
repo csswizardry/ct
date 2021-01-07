@@ -137,13 +137,13 @@ head script:not(:empty) ~ title {
  * Blocked Scripts.
  */
 
-head [rel="stylesheet"] ~ script,
+head [rel="stylesheet"]:not([media="print"]) ~ script,
 head style:not(:empty) ~ script {
   border-style: var(--ct-is-affected);
   border-color: var(--ct-warn);
 }
 
-  head [rel="stylesheet"] ~ script::before,
+  head [rel="stylesheet"]:not([media="print"]) ~ script::before,
   head style:not(:empty) ~ script::before {
     content: "[JS blocked by CSS – " attr(src) "]";
   }
@@ -200,6 +200,7 @@ head script[async][defer] {
  * We’re done!
  */
 
+link[rel="stylesheet"][media="print"],
 link[rel="stylesheet"].ct, style.ct,
 script[async], script[defer], script[type=module] {
   display: none;

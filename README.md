@@ -32,6 +32,9 @@ document.head.appendChild(ct);
 
 ## Limitations
 
+* **Non-matching `media` types:** Currently, `ct.css` only takes print
+  stylesheets into account. This means that you may experience false-positives
+  for other non-blocking stylesheets.
 * **Injected `script` elements:** `ct.css`, as with all CSS, acts against the
   DOM and not the HTML. As such, injected `script` elements will be falsely
   flagged as blocking.
