@@ -115,7 +115,7 @@ head script:not(:empty) {
  *
  * These selectors are generally more complex because the Key Selector (`title`)
  * depends on the specific conditions of preceding JS--we can’t cast a wide net
- * and narrow it down later as we can when targeting script and style elements.
+ * and narrow it down later as we can when targeting elements directly.
  */
 
 head script[src]:not([async]):not([defer]):not([type=module]) ~ title,
@@ -136,6 +136,11 @@ head script:not(:empty) ~ title {
 
 /**
  * Blocked Scripts.
+ *
+ * These selectors are generally more complex because the Key Selector
+ * (`script`) depends on the specific conditions of preceding CSS--we can’t cast
+ * a wide net and narrow it down later as we can when targeting elements
+ * directly.
  */
 
 head [rel="stylesheet"]:not([media="print"]):not(.ct) ~ script,
@@ -157,6 +162,8 @@ head style:not(:empty) ~ script {
  * Third Party blocking resources.
  *
  * Expect false-positives here… it’s a crude proxy at best.
+ *
+ * Selector-chaining (e.g. `[src][src]`) is used to bump up specificity.
  */
 
 head script[src][src][src^="//"],
@@ -180,6 +187,11 @@ head [rel="stylesheet"][href^="http"] {
 
 
 
+
+/**
+ * Using both `async` and `defer` is redundant (an anti-pattern, even). Let’s
+ * flag that.
+ */
 
 head script[src][async][defer] {
   display: block;
