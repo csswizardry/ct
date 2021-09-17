@@ -8,6 +8,10 @@ Your `<head>` is the single biggest render-blocking part of your page—ensuring
 it is well-formed is critical. `ct.css` is a CSS diagnostic snippet that exposes
 potential performance issues in your page’s `<head>` tags.
 
+## Example Output
+
+![](./demo.png)
+
 ## Simple Usage
 
 Paste this anywhere in your HTML:
