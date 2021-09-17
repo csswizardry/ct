@@ -35,13 +35,15 @@ html {
 
 head,
 head script,
-head style, head [rel="stylesheet"] {
+head style, head [rel="stylesheet"],
+head script ~ meta[http-equiv="content-security-policy"] {
   display: block;
 }
 
 head script,
 head style, head [rel="stylesheet"],
-head title {
+head title,
+head script ~ meta[http-equiv="content-security-policy"] {
   margin: 5px;
   padding: 5px;
   border-width: 5px;
@@ -202,6 +204,23 @@ head [rel="stylesheet"][href^="http"] {
   head [rel="stylesheet"][href^="//"]::before,
   head [rel="stylesheet"][href^="http"]::before {
     content: "[Third Party Blocking Stylesheet – " attr(href) "]";
+  }
+
+
+
+
+
+/**
+ * Mid-HEAD CSP disables the Preload Scanner
+ */
+
+head script ~ meta[http-equiv="content-security-policy"] {
+  border-style: var(--ct-is-problematic);
+  border-color: var(--ct-error);
+}
+
+  head script ~ meta[http-equiv="content-security-policy"]::before {
+    content: "[Meta CSP defined after JS]"
   }
 
 
