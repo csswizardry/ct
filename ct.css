@@ -36,14 +36,16 @@ html {
 head,
 head script,
 head style, head [rel="stylesheet"],
-head script ~ meta[http-equiv="content-security-policy"] {
+head script ~ meta[http-equiv="content-security-policy"],
+head > meta[charset]:not(:nth-child(-n+5)) {
   display: block;
 }
 
 head script,
 head style, head [rel="stylesheet"],
 head title,
-head script ~ meta[http-equiv="content-security-policy"] {
+head script ~ meta[http-equiv="content-security-policy"],
+head > meta[charset]:not(:nth-child(-n+5)) {
   margin: 5px;
   padding: 5px;
   border-width: 5px;
@@ -222,6 +224,22 @@ head script ~ meta[http-equiv="content-security-policy"] {
   head script ~ meta[http-equiv="content-security-policy"]::before {
     content: "[Meta CSP defined after JS]"
   }
+
+
+
+
+
+/**
+ * Charset should appear as early as possible
+ */
+head > meta[charset]:not(:nth-child(-n+5)) {
+  border-style: var(--ct-is-problematic);
+  border-color: var(--ct-warn);
+}
+
+head > meta[charset]:not(:nth-child(-n+5))::before {
+  content: "[Charset should appear as early as possible]";
+}
 
 
 
