@@ -17,7 +17,7 @@
  * custom properties for use later on.
  */
 
-html {
+head {
   --ct-is-problematic: solid;
   --ct-is-affected: dashed;
   --ct-notify: #0bce6b;
@@ -35,6 +35,8 @@ html {
 
 head,
 head script,
+head script:not([src])[async],
+head script:not([src])[defer],
 head style, head [rel="stylesheet"],
 head script ~ meta[http-equiv="content-security-policy"],
 head > meta[charset]:not(:nth-child(-n+5)) {
@@ -176,6 +178,28 @@ head script[src][src][async][defer] {
 
   head script[src][src][async][defer]::before {
     content: "[async and defer is redundant: prefer defer – " attr(src) "]";
+  }
+
+
+
+
+
+/**
+ * Async and defer simply do not work on inline scripts. It won’t do any harm,
+ * but it’s useful to know about.
+ */
+head script:not([src])[async],
+head script:not([src])[defer] {
+  border-style: var(--ct-is-problematic);
+  border-color: var(--ct-warn);
+}
+
+  head script:not([src])[async]::before {
+    content: "The async attribute is redundant on inline scripts"
+  }
+
+  head script:not([src])[defer]::before {
+    content: "The defer attribute is redundant on inline scripts"
   }
 
 
