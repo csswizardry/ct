@@ -168,13 +168,13 @@ head style:not(:empty) ~ script {
  * flag that.
  */
 
-head script[src][async][defer] {
+head script[src][src][async][defer] {
   display: block;
   border-style: var(--ct-is-problematic);
   border-color: var(--ct-warn);
 }
 
-  head script[src][async][defer]::before {
+  head script[src][src][async][defer]::before {
     content: "[async and defer is redundant: prefer defer – " attr(src) "]";
   }
 
