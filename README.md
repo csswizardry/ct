@@ -5,7 +5,7 @@
 > — [wikipedia.org/Computed_tomography_of_the_head](https://en.wikipedia.org/wiki/Computed_tomography_of_the_head)
 
 Your `<head>` is the single biggest render-blocking part of your page—ensuring
-it is well-formed is critical. `ct.css` is a CSS diagnostic snippet that exposes
+it is well-formed is critical. `ct.css` is a diagnostic CSS snippet that exposes
 potential performance issues in your page’s `<head>` tags.
 
 ## Example Output
