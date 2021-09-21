@@ -27,11 +27,13 @@ Paste this anywhere in your HTML:
 [_Run Snippets Of JavaScript On Any Page With Chrome DevTools_](https://developers.google.com/web/tools/chrome-devtools/javascript/snippets)
 
 ```
-const ct = document.createElement('link');
-ct.rel = 'stylesheet';
-ct.href = 'https://csswizardry.com/ct/ct.css';
-ct.classList.add('ct');
-document.head.appendChild(ct);
+(function(){
+  var ct = document.createElement('link');
+  ct.rel = 'stylesheet';
+  ct.href = 'https://csswizardry.com/ct/ct.css';
+  ct.classList.add('ct');
+  document.head.appendChild(ct);
+}());
 ```
 
 ## Limitations
