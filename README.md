@@ -20,10 +20,6 @@ Paste this anywhere in your HTML:
 <link rel="stylesheet" href="https://csswizardry.com/ct/ct.css" class="ct" />
 ```
 
-## Bookmarklet
-
-Drag and drop the following link to your bookmarks bar: <a href="#0">ct.css</a>.
-
 ## Chrome Snippet
 
 ![](./chrome-snippet.png)
