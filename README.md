@@ -1,4 +1,4 @@
-# `ct.css` – Let’s take a look inside your `<head>`
+# 🧠 `ct.css` – Let’s take a look inside your `<head>`
 
 > Computed tomography of the head uses a series of X-rays in a CT scan of the
 > head…  
