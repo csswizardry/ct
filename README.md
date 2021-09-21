@@ -12,6 +12,12 @@ potential performance issues in your page’s `<head>` tags.
 
 ![](./demo.png)
 
+* **Red:** This is an error and should be addressed.
+* **Orange:** This could be problematic in certain scenarios.
+* **Green:** This is fine and is purely informational.
+* **Solid:** This file is the problem.
+* **Dashed:** Another file(s) are causing problems with this file.
+
 ## Simple Usage
 
 Paste this anywhere in your HTML:
