@@ -276,7 +276,7 @@ head > meta[charset]:not(:nth-child(-n+5))::before {
  */
 
 link[rel="stylesheet"][media="print"],
-link[rel="stylesheet"].ct, style.ct,
+link[rel="stylesheet"].ct, style.ct, link[rel="stylesheet"][href$="/ct.css"],
 script[async], script[defer], script[type=module] {
   display: none;
 }
