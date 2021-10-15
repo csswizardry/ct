@@ -35,6 +35,7 @@ head {
 
 head,
 head script,
+head script[type]:not([type="text/javascript"]),
 head script:not([src])[async],
 head script:not([src])[defer],
 head style, head [rel="stylesheet"],
@@ -126,6 +127,7 @@ head script:not(:empty) {
  */
 
 head script[src]:not([async]):not([defer]):not([type=module]) ~ title,
+head script[type]:not([type="text/javascript"]) ~ title,
 head script:not(:empty) ~ title {
   display: block;
   border-style: var(--ct-is-affected);
@@ -195,11 +197,41 @@ head script:not([src])[defer] {
 }
 
   head script:not([src])[async]::before {
-    content: "The async attribute is redundant on inline scripts"
+    content: "[The async attribute is redundant on inline scripts]"
   }
 
   head script:not([src])[defer]::before {
-    content: "The defer attribute is redundant on inline scripts"
+    content: "[The defer attribute is redundant on inline scripts]"
+  }
+
+
+
+
+
+/**
+ * Supplying a character encoding for scripts is invalid and may pervert the
+ * script from loading.
+ */
+head script[type*="charset"] {
+  border-style: var(--ct-is-problematic);
+  border-color: var(--ct-warn);
+}
+
+  head script[type*="charset"]::before {
+    content: "[charset on scripts may prevent script from loading]"
+  }
+
+
+
+
+
+head script[type="text/javascript"] {
+  border-style: var(--ct-is-problematic);
+  border-color: var(--ct-warn);
+}
+
+  head script[type="text/javascript"]::before {
+    content: "[" attr(type) " is redundant: you might as well delete it]"
   }
 
 
@@ -275,8 +307,8 @@ head > meta[charset]:not(:nth-child(-n+5))::before {
  * We’re done!
  */
 
-link[rel="stylesheet"][media="print"],
-link[rel="stylesheet"].ct, style.ct,
-script[async], script[defer], script[type=module] {
+head link[rel="stylesheet"][media="print"],
+head link[rel="stylesheet"].ct, head style.ct,
+head script[async], head script[defer], head script[type=module], head script[type]:not([type="text/javascript"]) {
   display: none;
 }
