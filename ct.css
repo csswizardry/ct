@@ -272,7 +272,7 @@ head [rel="stylesheet"][href^="http"] {
  * Mid-HEAD CSP disables the Preload Scanner
  */
 
-head script ~ meta[http-equiv="content-security-policy"] {
+head script ~ meta[http-equiv="content-security-policy" i] {
   border-style: var(--ct-is-problematic);
   border-color: var(--ct-error);
 }
